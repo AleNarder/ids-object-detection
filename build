@@ -1,0 +1,41 @@
+#!/bin/bash
+
+IMAGE_SIZE=224
+ARCHITECTURE="mobilenet_0.50_${IMAGE_SIZE}"
+# Numero di iterazioni per affinare il modello
+ITERATIONS=500
+# Cartella in cui andranno copiati modello ed etichette (.tflite, labels.txt)
+ANDROID_PROJECT_PATH="./android"
+
+tensorboard --logdir tf_files/training_summaries 
+echo "***********************************************************************************"
+echo "* CREO MODELLO..."
+echo "***********************************************************************************"
+python -m scripts.retrain \
+--bottleneck_dir=tf_files/bottlenecks \
+--how_many_training_steps=500 \
+--model_dir=tf_files/models/ \
+--summaries_dir=tf_files/training_summaries/"${ARCHITECTURE}" \
+--output_graph=tf_files/retrained_graph.pb \
+--output_labels=tf_files/retrained_labels.txt \
+--architecture="${ARCHITECTURE}" \
+--image_dir=tf_files/classes_photos
+echo "***********************************************************************************"
+echo "* MODELLO CREATO" 
+echo "***********************************************************************************"
+sleep 1
+tflite_convert \
+  --graph_def_file=tf_files/retrained_graph.pb \
+  --output_file=tf_files/optimized_graph.lite \
+  --output_format=TFLITE \
+  --input_shapes=1,${IMAGE_SIZE},${IMAGE_SIZE},3 \
+  --input_arrays=input \
+  --output_arrays=final_result 
+echo "***********************************************************************************"
+echo "* CREATO MODELLO LITE"
+echo "***********************************************************************************"
+sleep 1
+cp tf_files/optimized_graph.lite ${ANDROID_PROJECT_PATH}/tflite/app/src/main/assets/graph.lite 
+echo "[OK]: Copiato graph.lite nella directory: ${ANDROID_PROJECT_PATH}/tflite/app/src/main/assets/" 
+cp tf_files/retrained_labels.txt ${ANDROID_PROJECT_PATH}/tflite/app/src/main/assets/labels.txt 
+echo "[OK]: Copiato labels.txt nella directory: ${ANDROID_PROJECT_PATH}/tflite/app/src/main/assets/"

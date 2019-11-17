@@ -1,20 +1,19 @@
-# Overview
+# Object recognition model builder
 
-This repo contains code for the "TensorFlow for poets 2" series of codelabs.
+## PREREQUISITES:
+1. A linux environment
+2. vitualenv installed locally
 
-There are multiple versions of this codelab depending on which version 
-of the tensorflow libraries you plan on using:
+## ENVIRONMENT SETUP
+1. From root directory, open terminal and run: <code>virtualenv env</code>
+2. Activate virtual environment, with command: <code>source env/bin/activate</code>
+3. <code>pip3 install tensorflow = 1.9.*</code>
 
-* For [TensorFlow Lite](https://www.tensorflow.org/mobile/tflite/) the new, ground up rewrite targeted at mobile devices
-  use [this version of the codelab](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-tflite) 
-* For the more mature [TensorFlow Mobile](https://www.tensorflow.org/mobile/mobile_intro) use 
-  [this version of the codealab](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2).
+## INSTRUCTIONS:
 
-
-This repo contains simplified and trimmed down version of tensorflow's example image classification apps.
-
-* The TensorFlow Lite version, in `android/tflite`, comes from [tensorflow/contrib/lite/](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/lite).
-* The Tensorflow Mobile version, in `android/tfmobile`, comes from [tensorflow/examples/android/](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/android).
-
-The `scripts` directory contains helpers for the codelab. Some of these come from the main TensorFlow repository, and are included here so you can use them without also downloading the main TensorFlow repo (they are not part of the TensorFlow `pip` installation).
+1. Make a video to the object you intend to recognize
+2. Save that video in videos dir -> (video has to be in .mp4 format)
+3. From videos directory, open terminal and run: <code>./mp4_2_jpeg {video-name}</code> 
+4. From root directory, open build script with your favourite editor and change the default parameters in order to satisfy your needs
+5. From root directory, open terminal and run: <code>./build</code> 
 
