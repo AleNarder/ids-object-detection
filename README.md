@@ -1,5 +1,8 @@
 # Object recognition model builder
 
+## DESCRIPTION
+A simple linux environment to produce useful .tflite models that can be integrated into an existing android application 
+
 ## PREREQUISITES:
 1. A linux environment
 2. vitualenv installed locally
