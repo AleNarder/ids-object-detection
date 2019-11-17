@@ -3,7 +3,7 @@
 ## DESCRIPTION
 A simple linux environment to produce useful .tflite models that can be integrated into an existing android application 
 
-## PREREQUISITES:
+## PREREQUISITES
 1. A linux environment
 2. vitualenv installed locally
 
@@ -12,7 +12,7 @@ A simple linux environment to produce useful .tflite models that can be integrat
 2. Activate virtual environment, with command: <code>source env/bin/activate</code>
 3. <code>pip3 install tensorflow = 1.9.*</code>
 
-## INSTRUCTIONS:
+## INSTRUCTIONS
 
 1. Make a video to the object you intend to recognize
 2. Save that video in videos dir -> (video has to be in .mp4 format)
